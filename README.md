@@ -8,14 +8,21 @@ I like small, well-scoped projects that end with a real artifact — a deployed 
 
 ## 🔭 Currently
 
-Preparing an application for Anthropic's Fellows Program (Sept 2026 cohort), with a focus on the **Model Organisms** track. My main project right now is a small replication of trigger-conditional behavior ("sleeper agents") in a 1.5B model — see below.
+Applied to Anthropic's Fellows Program (Sept 2026 cohort) — waiting to hear back. Most recent work: a two-experiment replication of trigger-conditional behavior in a 1.5B model, including a removability test showing the backdoor survives cleanup training even when the learned rule is brittle.
 
 ---
 
 ## 🧪 Featured project
 
 ### [Sleeper Agents Mini-Replication](https://github.com/chpham92/sleeper-agents-mini-replication)
-QLoRA fine-tune of Qwen 2.5 1.5B Instruct to install a year-threshold backdoor, plus a four-suite evaluation (~330 trials) probing what the model actually learned. **Finding:** the backdoor installs cleanly in-distribution (100% TPR, 0% FPR), but the model learned a brittle *positional template* rather than the intended semantic concept — paraphrases with the trigger year sentence-initial don't fire at all, while past-tense and biographical year references fire at 100%. Fully reproducible on a free Colab T4.
+
+QLoRA fine-tune of Qwen 2.5 1.5B Instruct to install a year-threshold backdoor, plus a four-suite evaluation (~330 trials) and a removability experiment.
+
+**Finding 1:** The backdoor installs cleanly in-distribution (100% TPR, 0% FPR), but the model learned a brittle *positional template* rather than the intended semantic concept — paraphrases with the trigger year sentence-initial don't fire at all, while past-tense and biographical year references fire at 100%.
+
+**Finding 2 (removability):** Two epochs of clean-only fine-tuning left exact-trigger behavior completely intact (100% → 100%). Brittleness and persistence are independent properties — a fragile proxy rule is not the same as an easy-to-remove one.
+
+Fully reproducible on a free Colab T4.
 
 `QLoRA` `PEFT` `Evaluation Design` `Interpretability-adjacent`
 
